@@ -1,16 +1,17 @@
-setwd('C:\\Users\\AdityendraSuman\\Downloads\\')
-x = read.csv("pincode_latest.csv") %>% 
-  rename(C = Country, S = State, D = District, P = Pincode)
-
+# install.packages("jsonlite","dplyr","stringr")
 library(jsonlite)
 library(dplyr)
 library(stringr)
 
+setwd('C:\\Users\\AdityendraSuman\\Downloads\\')
+
+x = read.csv("pincode_latest.csv") %>% 
+  rename(C = Country, S = State, D = District, P = Pincode)
 
 y1 = minify(toJSON(x))
 
 nchar(y1)
-# print(y1)
+writeLines(y1, "pincode_latest_json_short.txt")
 
 #=======================
 
@@ -45,7 +46,7 @@ cou <- str_sub(cou, start = 2)
 y2 = paste0('{"C":[',cou,']}')
 
 nchar(y2)
-writeLines(y2, "pincode_latest_json.txt")
+writeLines(y2, "pincode_latest_json_long.txt")
 
 #---------------------  
 # {
